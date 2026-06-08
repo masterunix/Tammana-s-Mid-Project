@@ -1,0 +1,9 @@
+{
+  "name": "pokedex-learning-project",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Express.js Pokedex Assignment",
+  "scripts": {
+    "postinstall": "echo '\\n--- Installing Backend Dependencies ---\\n' && cd backend && npm install && echo '\\n--- Installing Frontend Dependencies ---\\n' && cd ../frontend && npm install && echo '\\n✅  All dependencies installed successfully! You are ready to code!\\n'"
+  }
+}

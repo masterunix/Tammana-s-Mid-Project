@@ -14,12 +14,24 @@ const TESTS = [
   { id: 7, name: "Task 7: Get by ID (/pokemon/:id)", endpoint: () => axios.get(`${API_URL}/pokemon/1`).then(r => r.data.id === 1 ? r : Promise.reject('Wrong ID')) },
   { id: 8, name: "Task 8: Search (?q=)", endpoint: () => axios.get(`${API_URL}/pokemon/search?q=chu`).then(r => Array.isArray(r.data) ? r : Promise.reject('Not array')) },
   { id: 9, name: "Task 9: Filter by Type", endpoint: () => axios.get(`${API_URL}/pokemon/type/electric`).then(r => Array.isArray(r.data) ? r : Promise.reject('Not array')) },
-  { id: 10, name: "Task 10: Pagination (?limit=)", endpoint: () => axios.get(`${API_URL}/pokemon?limit=1`).then(r => r.data.length === 1 ? r : Promise.reject('Length not 1')) },
+  { id: 10, name: "Task 10: Pagination (limit)", endpoint: () => axios.get(`${API_URL}/pokemon?limit=1`).then(r => r.data.length === 1 ? r : Promise.reject('Length not 1')) },
   { id: 11, name: "Task 11: Create New (POST)", endpoint: () => axios.post(`${API_URL}/pokemon`, { name: "TestMon" }) },
   { id: 12, name: "Task 12: Validation (400)", endpoint: () => axios.post(`${API_URL}/pokemon`, {}).then(r => Promise.reject('Should fail')).catch(e => e.response?.status === 400 ? e : Promise.reject('Wrong status')) },
-  { id: 13, name: "Task 13: Update (PUT)", endpoint: () => axios.put(`${API_URL}/pokemon/1`, { level: 99 }) },
+  { id: 13, name: "Task 13: Update (PUT)", endpoint: () => axios.put(`${API_URL}/pokemon/1`, { name: "Bulba", level: 99 }) },
   { id: 14, name: "Task 14: Delete (DELETE)", endpoint: () => axios.delete(`${API_URL}/pokemon/1`, { validateStatus: s => s === 200 || s === 404 }) },
   { id: 15, name: "Task 15: 404 Handler", endpoint: () => axios.get(`${API_URL}/this-route-does-not-exist`).then(r => Promise.reject('Should 404')).catch(e => e.response?.status === 404 ? e : Promise.reject('Wrong status')) },
+  
+  // NEW TASKS 16-25
+  { id: 16, name: "Task 16: 500 Error Handler", endpoint: () => axios.get(`${API_URL}/error`).then(r => Promise.reject('Should 500')).catch(e => e.response?.status === 500 ? e : Promise.reject('No 500')) },
+  { id: 17, name: "Task 17: Get Total Count", endpoint: () => axios.get(`${API_URL}/pokemon/count`).then(r => r.data.total !== undefined ? r : Promise.reject('No total field')) },
+  { id: 18, name: "Task 18: Sort by Name", endpoint: () => axios.get(`${API_URL}/pokemon?sort=name`).then(r => r.data.length > 0 ? r : Promise.reject('Fails')) },
+  { id: 19, name: "Task 19: Sort by Level", endpoint: () => axios.get(`${API_URL}/pokemon?sort=level`).then(r => r.data.length > 0 ? r : Promise.reject('Fails')) },
+  { id: 20, name: "Task 20: Pagination (skip)", endpoint: () => axios.get(`${API_URL}/pokemon?limit=1&skip=1`).then(r => r.data.length === 1 ? r : Promise.reject('Length not 1')) },
+  { id: 21, name: "Task 21: PATCH Level", endpoint: () => axios.patch(`${API_URL}/pokemon/1/level`, { level: 10 }) },
+  { id: 22, name: "Task 22: PATCH Name", endpoint: () => axios.patch(`${API_URL}/pokemon/1/name`, { name: "Bulbasaur" }) },
+  { id: 23, name: "Task 23: Update Validation", endpoint: () => axios.patch(`${API_URL}/pokemon/1/level`, { level: -5 }).then(r => Promise.reject('Should fail')).catch(e => e.response?.status === 400 ? e : Promise.reject('Wrong status')) },
+  { id: 24, name: "Task 24: Get by Level", endpoint: () => axios.get(`${API_URL}/pokemon/level/5`).then(r => Array.isArray(r.data) ? r : Promise.reject('Not array')) },
+  { id: 25, name: "Task 25: Delete All", endpoint: () => axios.delete(`${API_URL}/pokemon`, { validateStatus: s => s === 200 || s === 404 }) },
 ];
 
 export default function Terminal({ logs }) {

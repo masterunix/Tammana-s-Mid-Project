@@ -19,8 +19,8 @@ const writeDB = (data) => {
 };
 
 // ==========================================
-// POKEDEX EXPRESS.JS ASSIGNMENT
-// Complete the 15 tasks below to make the React app work!
+// POKEDEX EXPRESS.JS ASSIGNMENT (25 TASKS)
+// Complete the tasks below to make the React app work!
 // ==========================================
 
 // Task 2: CORS Middleware
@@ -39,6 +39,15 @@ const writeDB = (data) => {
 // TODO: Create a `GET /api/health` route that returns `{ status: 'ok' }`.
 
 
+// ----------------------------------------------------
+// IMPORTANT: Specific routes must go ABOVE dynamic routes (like `/:id`)
+// ----------------------------------------------------
+
+// Task 17: Get Total Count
+// TODO: Create a `GET /api/pokemon/count` route.
+// It should return the total number of pokemon: `{ total: X }`.
+
+
 // Task 8: Search Pokemon
 // TODO: Create a `GET /api/pokemon/search` route. 
 // It should read the `q` query parameter (`req.query.q`) and filter the pokemon array by name.
@@ -49,16 +58,34 @@ const writeDB = (data) => {
 // It should filter the pokemon array where the type matches `req.params.type`.
 
 
-// Task 6 & 10: Get All & Pagination
+// Task 24: Get by Level
+// TODO: Create a `GET /api/pokemon/level/:level` route.
+// It should filter the pokemon array where the level matches `req.params.level`.
+
+
+// ----------------------------------------------------
+// GENERAL ROUTES
+// ----------------------------------------------------
+
+// Task 25: Delete All (Reset)
+// TODO: Create a `DELETE /api/pokemon` route.
+// Empty the pokemon array in the database and return a success message.
+
+
+// Task 6, 10, 18, 19, 20: Get All, Sorting, and Pagination
 app.get('/api/pokemon', (req, res) => {
   const db = readDB();
   let results = db.pokemon;
   
-  // Task 10: Pagination
-  // TODO: If `req.query.limit` exists, only return that many pokemon (use `.slice()`).
+  // Task 18 & 19: Sorting
+  // TODO: If `req.query.sort === 'name'`, sort results alphabetically.
+  // TODO: If `req.query.sort === 'level'`, sort results by level (highest first).
+
+  // Task 10 & 20: Pagination
+  // TODO: If `req.query.skip` exists, skip that many items in the array.
+  // TODO: If `req.query.limit` exists, only return that many items.
   
-  
-  res.json(results); // Task 6 is partially done for you here!
+  res.json(results);
 });
 
 
@@ -73,18 +100,46 @@ app.get('/api/pokemon', (req, res) => {
 // Remember to push the new pokemon to the array and call `writeDB(db)`.
 
 
-// Task 13: Update
+// Task 13: Update All (PUT)
 // TODO: Create a `PUT /api/pokemon/:id` route.
-// Find the pokemon by ID, update its properties with `req.body`, save to DB, and return the updated pokemon.
+// Task 23: Validation - If name is empty or level < 0, return 400 Bad Request.
+// Find the pokemon by ID, completely update its properties with `req.body`, save to DB.
+
+
+// Task 21: Partial Update Level (PATCH)
+// TODO: Create a `PATCH /api/pokemon/:id/level` route.
+// Update ONLY the level of the specific pokemon based on `req.body.level`.
+// Task 23: Validation - Return 400 if level is negative.
+
+
+// Task 22: Partial Update Name (PATCH)
+// TODO: Create a `PATCH /api/pokemon/:id/name` route.
+// Update ONLY the name of the specific pokemon based on `req.body.name`.
+// Task 23: Validation - Return 400 if name is empty.
 
 
 // Task 14: Delete
 // TODO: Create a `DELETE /api/pokemon/:id` route.
-// Remove the pokemon from the array, save to DB, and return a success message.
+// Remove the specific pokemon from the array, save to DB, and return a success message.
 
+
+// ----------------------------------------------------
+// ERROR HANDLING (Must be at the bottom, before listen)
+// ----------------------------------------------------
+
+// Task 16: Global Error Route (For Testing)
+app.get('/api/error', (req, res, next) => {
+  next(new Error('This is a simulated server crash!'));
+});
 
 // Task 15: 404 Handler
-// TODO: Add a catch-all middleware function here that returns a 404 status and a "Route not found" error.
+// TODO: Add a catch-all middleware function `app.use((req, res) => ...)` 
+// that returns a 404 status and a "Route not found" error.
+
+
+// Task 16: Global Error Handler
+// TODO: Add an error handling middleware `app.use((err, req, res, next) => ...)`
+// that catches errors (like the one from `/api/error`) and returns a 500 status with the error message in JSON.
 
 
 // Task 1: Server Boot
