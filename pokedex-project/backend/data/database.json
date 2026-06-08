@@ -1,0 +1,39 @@
+{
+  "pokemon": [
+    {
+      "id": 1,
+      "name": "Bulbasaur",
+      "type": "Grass",
+      "level": 5,
+      "image": "bulbasaur.png"
+    },
+    {
+      "id": 4,
+      "name": "Charmander",
+      "type": "Fire",
+      "level": 5,
+      "image": "charmander.png"
+    },
+    {
+      "id": 7,
+      "name": "Squirtle",
+      "type": "Water",
+      "level": 5,
+      "image": "squirtle.png"
+    },
+    {
+      "id": 25,
+      "name": "Pikachu",
+      "type": "Electric",
+      "level": 10,
+      "image": "pikachu.png"
+    },
+    {
+      "id": 39,
+      "name": "Jigglypuff",
+      "type": "Normal",
+      "level": 8,
+      "image": "jigglypuff.png"
+    }
+  ]
+}
