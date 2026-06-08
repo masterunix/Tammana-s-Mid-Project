@@ -86,19 +86,6 @@ export default function Pokedex({ addLog }) {
     }
   };
 
-  const handleDeleteAll = async () => {
-    if (!window.confirm("Are you sure you want to release ALL Pokemon?")) return;
-    try {
-      addLog('info', `DELETE /api/pokemon - Releasing all Pokemon...`);
-      await axios.delete(`${API_URL}/pokemon`);
-      addLog('success', `Successfully released all Pokemon!`);
-      setPage(0);
-      fetchPokemon();
-    } catch (error) {
-      addLog('error', `Failed DELETE /api/pokemon - ${error.message}`);
-    }
-  };
-
   const handleLevelUp = async (p) => {
     try {
       // Changed to use PATCH as per the new Task 21
@@ -131,10 +118,6 @@ export default function Pokedex({ addLog }) {
         </div>
         
         <div className="controls">
-          <button className="btn btn-danger" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }} onClick={handleDeleteAll}>
-            <ShieldAlert size={18} /> Release All
-          </button>
-          
           <select 
             className="search-input" 
             value={sortOption} 

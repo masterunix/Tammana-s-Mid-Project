@@ -19,7 +19,7 @@ const writeDB = (data) => {
 };
 
 // ==========================================
-// POKEDEX EXPRESS.JS ASSIGNMENT (25 TASKS)
+// POKEDEX EXPRESS.JS ASSIGNMENT (24 TASKS)
 // Complete the tasks below to make the React app work!
 // ==========================================
 
@@ -66,11 +66,6 @@ const writeDB = (data) => {
 // ----------------------------------------------------
 // GENERAL ROUTES
 // ----------------------------------------------------
-
-// Task 25: Delete All (Reset)
-// TODO: Create a `DELETE /api/pokemon` route.
-// Empty the pokemon array in the database and return a success message.
-
 
 // Task 6, 10, 18, 19, 20: Get All, Sorting, and Pagination
 app.get('/api/pokemon', (req, res) => {
